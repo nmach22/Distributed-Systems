@@ -1,6 +1,6 @@
 package kvsrv
 
-import "6.5840/labrpc"
+import "MapReduce/labrpc"
 import "testing"
 import "os"
 

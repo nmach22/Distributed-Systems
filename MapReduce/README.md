@@ -1,10 +1,10 @@
-# 6.5840 - Spring 2025
+# 6.5840
 
-## Lab 1: MapReduce
+## [MapReduce](https://pdos.csail.mit.edu/6.824/labs/lab-mr.html)
 
 ### Introduction
 
-This project is an implementation of a distributed MapReduce framework inspired by the original [MapReduce paper](https://research.google/pubs/pub62/). The implementation consists of a **coordinator** process that manages task distribution and fault tolerance, and multiple **worker** processes that execute map and reduce tasks in parallel. Workers communicate with the coordinator using RPC.
+This project is an implementation of a distributed MapReduce framework inspired by the original [MapReduce paper](https://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf). The implementation consists of a **coordinator** process that manages task distribution and fault tolerance, and multiple **worker** processes that execute map and reduce tasks in parallel. Workers communicate with the coordinator using RPC.
 
 ### Features
 
@@ -27,46 +27,61 @@ $ go version
 
 ### Setup
 
-Clone the repository and navigate to the project directory:
+Clone the repository and navigate to the MapReduce directory:
 
 ```sh
-$ git clone git://g.csail.mit.edu/6.5840-golabs-2025 6.5840
-$ cd 6.5840
+$ git clone https://github.com/nmach22/Distributed-Systems.git Distributed-Systems
+$ cd Distributed-Systems/MapReduce
 ```
 
-### Running the Sequential Implementation
+### Initial Setup
+The provided starter code includes:
+- A simple sequential MapReduce implementation: `src/main/mrsequential.go`
+- Sample MapReduce applications:
+    - **Word Count** (`mrapps/wc.go`)
+    - **Text Indexer** (`mrapps/indexer.go`)
 
-To get familiar with the MapReduce framework, start by running the provided sequential version:
-
-```sh
+To run a sequential word count:
+```
 $ cd src/main
 $ go build -buildmode=plugin ../mrapps/wc.go
 $ rm mr-out*
 $ go run mrsequential.go wc.so pg*.txt
+$ more mr-out-0
 ```
 
 The output will be in `mr-out-0` and should contain word counts from the input files.
 
 ---
 
-## Implementing Distributed MapReduce
+## Implementation Overview
+Task was to implement a **distributed MapReduce system** consisting of three main components:
 
-Your task is to implement the distributed version using:
+1. **Coordinator (mrcoordinator.go)** (`src/mr/coordinator.go`)
+    - Assigns Map and Reduce tasks to workers
+    - Detects worker failures and reassigns tasks
+    - Terminates when all tasks are complete
+2. **Worker (mrworker.go)** (`src/mr/worker.go`)
+    - Requests tasks from the coordinator
+    - Executes Map or Reduce functions
+    - Reads and writes intermediate files
+    - Reports completion to the coordinator
+3. **RPC Definitions** (`src/mr/rpc.go`)
 
-- **Coordinator** (`mr/coordinator.go`)
-- **Worker** (`mr/worker.go`)
-- **RPC Definitions** (`mr/rpc.go`)
+Workers communicate with the coordinator using **RPC**. Tasks must be reassigned if a worker fails to complete them within **10 seconds**.
+
+---
 
 ### Execution Flow
 
 1. **Start the Coordinator** with input files:
    ```sh
    $ rm mr-out*
-   $ go run mrcoordinator.go pg-*.txt
+   $ go run src/main/mrcoordinator.go pg-*.txt
    ```
 2. **Start Worker Processes**:
    ```sh
-   $ go run mrworker.go wc.so
+   $ go run src/main/mrworker.go mrapps/wc.so
    ```
 3. The workers will request tasks from the coordinator, process them, and write output files.
 4. When complete, verify the output:
@@ -87,7 +102,7 @@ Your task is to implement the distributed version using:
 A test script is provided to validate the correctness and robustness of the implementation:
 
 ```sh
-$ cd ~/6.5840/src/main
+$ cd src/main
 $ bash test-mr.sh
 ```
 
@@ -97,15 +112,14 @@ Expected output upon successful completion:
 *** PASSED ALL TESTS
 ```
 
-If a test fails, ensure your output files are formatted correctly and that tasks are executed in parallel.
-
 ---
 
 ## Design Considerations
 
 ### Intermediate File Storage
 
-- Use the format `mr-X-Y`, where **X** is the Map task number and **Y** is the Reduce task number.
+- **Intermediate File Naming:** Use the format `mr-X-Y`, where **X** is the Map task number and **Y** is the Reduce task number.
+- **Temporary Files:** Write output to a temporary file and rename it atomically using `os.Rename`.
 - JSON encoding is recommended for storing key/value pairs.
 
 ### Worker Termination
@@ -117,30 +131,37 @@ If a test fails, ensure your output files are formatted correctly and that tasks
 
 - The coordinator manages concurrent RPC requests.
 - Use locks to protect shared data.
-- Test for race conditions with:
-  ```sh
-  $ go run -race mrworker.go wc.so
-  ```
-
 ---
 
-## Hints & Debugging
-
-- Start by implementing **basic task request handling** in `mr/coordinator.go` and `mr/worker.go`.
-- Use `log.Printf()` for debugging RPC interactions.
-- Test with `mrapps/crash.go` to ensure fault tolerance.
-- Use **temporary files** and rename them atomically to prevent incomplete writes.
-
----
-
-## Conclusion
-
-This lab provides hands-on experience with distributed systems and fault-tolerant task execution. By completing it, you will gain insights into scheduling, concurrency, and distributed coordination.
-
----
 
 ### References
 
+- [Original MapReduce Paper](https://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf)
 - [MapReduce: Simplified Data Processing on Large Clusters](https://research.google/pubs/pub62/)
 - [Go RPC Documentation](https://pkg.go.dev/net/rpc)
 - [Go Concurrency Patterns](https://go.dev/doc/effective_go#concurrency)
+- [Lab guidance](https://pdos.csail.mit.edu/6.824/labs/guidance.html)
+
+
+## Code Structure
+```
+MapReduce/
+├── src/
+│   ├── main/
+│   │   ├── mrcoordinator.go  # Coordinator logic
+│   │   ├── mrworker.go       # Worker logic
+│   │   ├── mrsequential.go   # Sequential implementation
+│   │   ├── test-mr.sh        # Test script
+│   ├── mr/
+│   │   ├── coordinator.go    # Implement your coordinator here
+│   │   ├── worker.go         # Implement your worker here
+│   │   ├── rpc.go            # RPC definitions
+│   ├── mrapps/
+│   │   ├── wc.go             # Word count application
+│   │   ├── indexer.go        # Text indexer application
+```
+
+
+
+## License
+This project is part of MIT's 6.5840 Distributed Systems course and is for educational purposes only.

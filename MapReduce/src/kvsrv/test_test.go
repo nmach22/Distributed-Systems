@@ -1,8 +1,8 @@
 package kvsrv
 
 import (
-	"6.5840/models"
-	"6.5840/porcupine"
+	"MapReduce/models"
+	"MapReduce/porcupine"
 
 	"fmt"
 	"io/ioutil"

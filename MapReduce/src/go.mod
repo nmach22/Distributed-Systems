@@ -1,3 +1,3 @@
-module 6.5840
+module MapReduce
 
 go 1.15

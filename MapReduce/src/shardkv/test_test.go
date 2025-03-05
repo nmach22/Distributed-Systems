@@ -1,7 +1,7 @@
 package shardkv
 
-import "6.5840/porcupine"
-import "6.5840/models"
+import "MapReduce/porcupine"
+import "MapReduce/models"
 import "testing"
 import "strconv"
 import "time"
