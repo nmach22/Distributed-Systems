@@ -54,7 +54,7 @@ The output will be in `mr-out-0` and should contain word counts from the input f
 
 ---
 
-## Implementation Overview
+## Implementation Details
 Task was to implement a **distributed MapReduce system** consisting of three main components:
 
 1. **Coordinator (mrcoordinator.go)** (`src/mr/coordinator.go`)
