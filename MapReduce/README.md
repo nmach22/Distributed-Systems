@@ -163,5 +163,5 @@ MapReduce/
 
 
 
-## License
+### License
 This project is part of MIT's 6.5840 Distributed Systems course and is for educational purposes only.

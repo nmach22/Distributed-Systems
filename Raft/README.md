@@ -86,6 +86,6 @@ go test -run 3D
 - [Raft Paper](https://raft.github.io/raft.pdf)
 - [MIT 6.5840 Course](http://nil.csail.mit.edu/6.5840/2024/)
 
-## License
-This project is for educational purposes as part of MIT's 6.5840 course.
+### License
+This project is part of MIT's 6.5840 Distributed Systems course and is for educational purposes only.
 
