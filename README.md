@@ -1,6 +1,6 @@
 # Distributed Systems Projects
 
-This repository contains the implementations of the assignments from the [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/) course. I have successfully completed each assignment and achieved a 100% grade in this labs.
+This repository contains the implementations of the assignments from the [MIT 6.824: Distributed Systems](http://nil.csail.mit.edu/6.5840/2024/) course. I have successfully completed each assignment and achieved a 100% grade in this labs.
 
 ## Course Overview
 
@@ -55,6 +55,10 @@ Distributed-Systems
 ├── README.md
 
 ```
+
+
+### References
+- [MIT 6.824: Distributed Systems](http://nil.csail.mit.edu/6.5840/2024/)
 
 
 ### License

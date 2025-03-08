@@ -63,7 +63,7 @@ go test -run 4B  # Test Part B
 
 ### References
 - [Raft Paper](https://raft.github.io/raft.pdf) (Sections 7 & 8)
-- [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)
+- [MIT 6.824: Distributed Systems](http://nil.csail.mit.edu/6.5840/2024/)
 
 
 ### License

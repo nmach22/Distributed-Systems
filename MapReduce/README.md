@@ -1,6 +1,6 @@
 # 6.5840
 
-## [MapReduce](https://pdos.csail.mit.edu/6.824/labs/lab-mr.html)
+## [MapReduce](http://nil.csail.mit.edu/6.5840/2024/labs/lab-mr.html)
 
 ### Introduction
 
@@ -137,7 +137,6 @@ Expected output upon successful completion:
 ### References
 
 - [Original MapReduce Paper](https://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf)
-- [MapReduce: Simplified Data Processing on Large Clusters](https://research.google/pubs/pub62/)
 - [Go RPC Documentation](https://pkg.go.dev/net/rpc)
 - [Go Concurrency Patterns](https://go.dev/doc/effective_go#concurrency)
 - [Lab guidance](https://pdos.csail.mit.edu/6.824/labs/guidance.html)

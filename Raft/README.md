@@ -16,18 +16,23 @@ This implementation follows the Raft paper, focusing on:
 - Persistence and recovery
 - Safety guarantees
 
-## Project Structure
+## Code Structure
 
 ```
-📁 src/
-   📁 raft/              # Core Raft implementation
-      ├── raft.go        # Main Raft logic
-      ├── persister.go   # Persistent state handling
-   📁 labrpc/            # RPC library for simulating network conditions
-   📁 kvraft/            # Key/value store (used in later labs)
-   📄 Makefile           # Build automation
-   📄 README.md          # Project documentation
+Fault-Tolerant-KV-Server
+├── src/
+│   ├── raft/              # Core Raft implementation
+│   │   ├── config.go
+│   │   ├── raft.go        # Main Raft logic
+│   │   ├── persister.go   # Persistent state handling
+│   │   ├── util.go
+│   │   ├── test_test.go
+│   ├── labrpc/            # RPC library for simulating network conditions
+│   ├── kvraft/            # Key/value store implementation
+│   ├── Makefile           # Build automation
+│   ├── README.md          # Project documentation
 ```
+
 
 ## Raft API
 

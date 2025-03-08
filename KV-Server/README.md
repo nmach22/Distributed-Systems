@@ -1,6 +1,6 @@
 # 6.5840
 
-## [Key/Value Server](https://pdos.csail.mit.edu/6.824/labs/lab-kvsrv1.html)
+## [Key/Value Server](http://nil.csail.mit.edu/6.5840/2024/labs/lab-kvsrv.html)
 
 ### Introduction
 
@@ -70,6 +70,10 @@ $ go test -race
 - Designing **synchronization mechanisms** (locks) using a simple key/value store.
 
 
+### References
+- [MIT 6.824: Distributed Systems](http://nil.csail.mit.edu/6.5840/2024/)
+
+
 ## Code Structure
 ```
 KV-Server/
@@ -81,6 +85,7 @@ KV-Server/
 │   │   ├── server.go
 │   │   ├── test_test.go
 ```
+
 
 ### License
 This project is part of MIT's 6.5840 Distributed Systems course and is for educational purposes only.
